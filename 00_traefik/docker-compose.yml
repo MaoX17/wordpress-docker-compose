@@ -1,0 +1,52 @@
+version: "3.3"
+
+services:
+
+  traefik:
+    image: "traefik:v2.2"
+    container_name: "traefik"
+#    command:
+#       # Only for development environment
+# #      - "--log.level=DEBUG"
+# #      - "--api.insecure=true"
+#       # Get Docker as the provider
+#       - "--providers.docker=true"
+#       # Avoid that all containers are exposed
+#       - "--providers.docker.exposedbydefault=false"
+#       # Settle the ports for the entry points
+#       - "--entrypoints.web.address=:80"
+#       - "--entrypoints.web-secure.address=:443"
+#       # Settle the autentification method to http challenge
+#       - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge=true"
+#       - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
+#       # Uncomment this to get a fake certificate when testing
+#       #- "--certificatesresolvers.myhttpchallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+#       # Settle letsencrypt as the certificate provider
+#       - "--certificatesresolvers.myhttpchallenge.acme.email=maurizio.proietti@gmail.com"
+#       - "--certificatesresolvers.myhttpchallenge.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+#      - "8080:8080"
+    networks:
+      - "proxy"
+    volumes:
+      # Store certificates in ./letsencrypt/acme.json
+      - "./data/letsencrypt:/letsencrypt"
+      # Connect to Doker socket
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      ## Configurazioni toml da https://www.digitalocean.com/community/tutorials/how-to-use-traefik-v2-as-a-reverse-proxy-for-docker-containers-on-ubuntu-20-04
+      - "./conf/traefik.toml:/traefik.toml"
+      - "./conf/traefik_dynamic.toml:/traefik_dynamic.toml"
+      - "./conf/acme.json:/acme.json"
+      
+
+
+networks:
+  proxy:
+    external: true
+      
+#networks:
+#    # Allow the use of traefik in other docker-compose.yml files
+#    traefik:
+#        external: true

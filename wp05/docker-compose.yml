@@ -1,0 +1,81 @@
+version: '3.1'
+
+services:
+
+
+  wordpress:
+#    image: wordpress
+    build:
+      # call the Dockerfile in ./wordpress
+      context: ./dockerfile/wp
+    restart: always
+    container_name: wp_wp05
+    environment:
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      VIRTUAL_PORT: ${VIRTUAL_PORT}
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+    labels:
+      - traefik.http.routers.${TRAEFIK_ROUTE_NAME}.rule=Host(`${LETSENCRYPT_HOST}`)
+      - traefik.http.routers.${TRAEFIK_ROUTE_NAME}.tls=true
+      - traefik.http.routers.${TRAEFIK_ROUTE_NAME}.tls.certresolver=lets-encrypt
+      - traefik.port=${VIRTUAL_PORT}
+    depends_on:
+      - db
+      - redis
+    restart: unless-stopped
+    networks:
+      - proxy
+      - backend
+    volumes:
+      - ./data/html:/var/www/html
+
+  db:
+    container_name: mysql_wp05
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    labels:
+      - traefik.enable=false
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    networks:
+      - backend
+
+
+  redis:
+    image: redis:6
+    container_name: redis_wp05
+    restart: always
+    sysctls:
+      - net.core.somaxconn=1024
+    labels:
+      - traefik.enable=false
+    volumes:
+      - ./data/redis:/data
+    networks:
+      - backend
+    # launch Redis in cache mode with :
+    #     #  - max memory up to 50% of your RAM if needed (--maxmemory 512mb)
+    #         #  - deleting oldest data when max memory is reached (--maxmemory-policy allkeys-lru)
+#    entrypoint: redis-server --maxmemory 512mb -maxmemory-policy allkeys-lru
+    entrypoint: redis-server /data/redis.conf
+
+
+
+
+networks:
+  proxy:
+    external: true
+  backend:
+    external: false
+
+

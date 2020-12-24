@@ -1,0 +1,26 @@
+[http.middlewares.simpleAuth.basicAuth]
+  users = [
+    "admin:$apr1$nHrhIJKm$o14qVTgU0lzD68XLIkJnv/"
+  ]
+
+[http.routers.api]
+  rule = "Host(`traefik.proietti.net`)"
+  entrypoints = ["websecure"]
+  middlewares = ["simpleAuth"]
+  service = "api@internal"
+  [http.routers.api.tls]
+    certResolver = "lets-encrypt"
+
+
+# [http.routers.strails-nginx]
+#   rule = "Host(`www.strails.it`)"
+#   entrypoints = ["websecure"]
+#   service = "strails-nginx"
+#   [http.routers.strails-nginx.tls]
+#     certResolver = "lets-encrypt"
+      
+
+# [http.services]
+#     [http.services.strails-nginx.loadBalancer]
+#       [[http.services.strails-nginx.loadBalancer.servers]]
+#         url = "http://www.strails.it:1080"
