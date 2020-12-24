@@ -285,22 +285,25 @@ networks:
 
 Lancio:
 
-   docker-compose build
-   docker-compose up -d
-
+```
+docker-compose build
+docker-compose up -d
+```
 
 
 Entro nel sito e completo l’installazione con dati casuali
 
 Poi faccio un rsync della SOLA directory wp-content:
 
-  rsync -uazv /var/www/maurizioproietti/wp/wp-content data/html/
- 
+```
+rsync -uazv /var/www/maurizioproietti/wp/wp-content data/html/
+``` 
 
 Poi eseguo il dump del vecchio DB:
 
-  mysqldump --opt maurizioproietti > dump.sql
-
+```
+mysqldump --opt maurizioproietti > dump.sql
+```
 
 E controllo che la prefix delle tabelle sia wp_
 
@@ -308,11 +311,15 @@ Se non lo fosse sostituisco la prefix che ha il dump con wp_
 
 Poi importo il dump nel nuovo db sotto docker:
 
-  cat dump.sql | docker exec -i mysql_www.maurizio.proietti.name /usr/bin/mysql -u root --password=secret123 db
+```
+cat dump.sql | docker exec -i mysql_www.maurizio.proietti.name /usr/bin/mysql -u root --password=secret123 db
+```
 
 Imposto i permessi sul filesystem per bene oppure (se ho fretta)
 
-  chmod -R 777 data
+```
+chmod -R 777 data
+```
 
 Entro nella sezione wp-admin e inizio gli aggiornamenti suggeriti nel seguente ordine (che penso possa variare la per scaramanzia non vario 🙂 )
 
@@ -329,6 +336,7 @@ Attenzione!!!
 
 Occorre settare correttamente l'indirizzo di redis: 
 
-  redis:6379
-
+```
+redis:6379
+```
 
