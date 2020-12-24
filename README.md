@@ -7,7 +7,7 @@ o
 [qui](https://github.com/MaoX17/wordpress-docker-compose/)
 
 
-![GreMaPro](https://www.maurizio.proietti.name/wp-content/uploads/2020/12/cropped-gremapro_small.gif =150x150)
+![GreMaPro](https://www.maurizio.proietti.name/wp-content/uploads/2020/12/cropped-gremapro_small.gif?s=150)
 
 ## Dockerizzare un wordpress esistente
 
