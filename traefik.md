@@ -42,7 +42,7 @@ Creo il file ./conf/traefik.toml
   dashboard = true
 
 [certificatesResolvers.lets-encrypt.acme]
-  email = "maurizio.proietti@gmail.com"
+  email = "maurizio.proietti(AT)EMAIL.com"
   storage = "acme.json"
   [certificatesResolvers.lets-encrypt.acme.tlsChallenge]
 

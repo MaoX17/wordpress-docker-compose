@@ -1,6 +1,11 @@
 # wordpress-docker-compose
 Eseguire wordpress su docker o migrare un Wordpress esistente su Docker
 
+Se alcuni link non dovessero funzionare prova qui
+https://github.com/MaoX17/wordpress-docker-compose/
+o
+[qui](https://github.com/MaoX17/wordpress-docker-compose/)
+
 
 ![GreMaPro](https://www.maurizio.proietti.name/wp-content/uploads/2020/12/cropped-gremapro_small.gif)
 
@@ -59,7 +64,7 @@ Creo il file ./conf/traefik.toml
   dashboard = true
 
 [certificatesResolvers.lets-encrypt.acme]
-  email = "maurizio.proietti(AT)EMAIL).com"
+  email = "maurizio.proietti(AT)EMAIL.com"
   storage = "acme.json"
   [certificatesResolvers.lets-encrypt.acme.tlsChallenge]
 
@@ -79,7 +84,7 @@ Creo il file ./conf/traefik_dynamic.toml
 ```
 [http.middlewares.simpleAuth.basicAuth]
   users = [
-    "username:$apr1$VDSty0Wy$5nrZ7nthjusltZXM0eE2s/"
+    "username:$apr1$VDSty0Wy$5nrZ7nthjusltZXM0XXeE2s/"
   ]
 
 [http.routers.api]
