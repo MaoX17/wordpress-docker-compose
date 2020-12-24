@@ -12,7 +12,7 @@ Adesso iniziamo
 
 Di seguito ci sono i passaggi per ralizzare il tutto da zero...
 
-Altrimenti ... quick install
+Altrimenti ... [quick install](quick-install.md)
 
 Per usare il docker-compose occorre creare prima di tutto un file .env
 
