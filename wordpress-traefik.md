@@ -1,3 +1,6 @@
+
+![GreMaPro](https://www.maurizio.proietti.name/wp-content/uploads/2020/12/cropped-gremapro_small.gif)
+
 # Dockerizzare un wordpress esistente
 
 Questa versione è valida sia con traefik che con nginx di jwilder come reverse proxy
