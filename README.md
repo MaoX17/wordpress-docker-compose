@@ -2,7 +2,7 @@
 Eseguire wordpress su docker o migrare un Wordpress esistente su Docker
 
 
-![GreMaPro](logo_150.png)
+![GreMaPro](https://www.gremapro.it/wp-content/uploads/2018/11/cropped-logo_300-3-300x296.png)
 
 ## Dockerizzare un wordpress esistente
 
