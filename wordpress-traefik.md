@@ -2,8 +2,6 @@
 
 Questa versione è valida sia con traefik che con nginx di jwilder come reverse proxy
 
-
-
 Adesso iniziamo
 
 Per usare il docker-compose occorre creare prima di tutto un file .env
