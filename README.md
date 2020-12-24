@@ -2,11 +2,17 @@
 Eseguire wordpress su docker o migrare un Wordpress esistente su Docker
 
 
+![GreMaPro](logo_150.png)
+
 ## Dockerizzare un wordpress esistente
 
 Questa versione è valida sia con traefik che con nginx di jwilder come reverse proxy
 
 Adesso iniziamo
+
+Di seguito ci sono i passaggi per ralizzare il tutto da zero...
+
+Altrimenti ... quick install
 
 Per usare il docker-compose occorre creare prima di tutto un file .env
 
